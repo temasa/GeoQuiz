@@ -8,6 +8,9 @@ import android.widget.*;
 public class QuizActivity extends Activity
 {
 	
+	private static final String TAG = "QuizActivity";
+	private static final String KEY_INDEX = "index";
+	
 	private Button mTrueButton;
 	private Button mFalseButton;
 	private Button mNextButton;
@@ -34,6 +37,7 @@ public class QuizActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
 	{
         super.onCreate(savedInstanceState);
+		Logger.d(this.getClass(), "onCreate()", "called");
         setContentView(R.layout.activity_quiz);
 		
 		mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -73,6 +77,54 @@ public class QuizActivity extends Activity
 			}
 		);
 		
+		if (savedInstanceState != null ) {
+			mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+		}
+		
 		updateQuestion();
     }
+
+	@Override
+	protected void onSaveInstanceState(Bundle savedInstanceState)
+	{
+		super.onSaveInstanceState(savedInstanceState);
+		Logger.d(this.getClass(), "onSaveInstanceState(Bundle)", "called");
+		savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+	}
+	
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		Logger.d(this.getClass(), "onStart()", "called");
+	}
+
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		Logger.d(this.getClass(), "onPause()", "called");
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		Logger.d(this.getClass(), "onResume()", "called");
+	}
+
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		Logger.d(this.getClass(), "onStop()", "called");
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		Logger.d(this.getClass(), "onDestroy()", "called");
+	}
+	
 }
